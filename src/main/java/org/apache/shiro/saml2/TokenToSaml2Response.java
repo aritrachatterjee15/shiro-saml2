@@ -33,6 +33,7 @@ import org.opensaml.xml.XMLObject;
 import org.opensaml.xml.io.Unmarshaller;
 import org.opensaml.xml.io.UnmarshallerFactory;
 import org.opensaml.xml.io.UnmarshallingException;
+import org.opensaml.xml.util.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -43,22 +44,20 @@ import org.xml.sax.SAXException;
  */
 public final class TokenToSaml2Response {
 
+	private static boolean isBootStrapped = false;
+
 	private TokenToSaml2Response() {
 		// Disabling initialization
 	}
 
 	public static Response convertToken(String token)
 			throws Saml2TokenValidationException {
-		try {
-			DefaultBootstrap.bootstrap();
-		} catch (ConfigurationException e) {
-			throw new Saml2TokenValidationException(
-					"OpenSAML bootstrap configuration failed.", e);
-		}
+		
+		doBootstrap();
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(
-				token.getBytes());
-
+				Base64.decode(token));
+		
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
 				.newInstance();
 		documentBuilderFactory.setNamespaceAware(true);
@@ -91,7 +90,18 @@ public final class TokenToSaml2Response {
 		} catch (UnmarshallingException e) {
 			throw new Saml2TokenValidationException(e);
 		}
-
 		return (Response) responseXmlObj;
+	}
+
+	private static void doBootstrap() throws Saml2TokenValidationException {
+		if (!isBootStrapped) {
+			try {
+				DefaultBootstrap.bootstrap();
+				isBootStrapped = true;
+			} catch (ConfigurationException e) {
+				throw new Saml2TokenValidationException(
+						"OpenSAML bootstrap configuration failed.", e);
+			}
+		}
 	}
 }

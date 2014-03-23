@@ -112,29 +112,6 @@ public class Saml2Filter extends AuthenticatingFilter {
 	}
 
 	/**
-	 * If login has been successful, redirect user to the original protected
-	 * URL.
-	 * 
-	 * @param token
-	 *            the token representing the current authentication
-	 * @param subject
-	 *            the current authenticated subject
-	 * @param request
-	 *            the incoming request
-	 * @param response
-	 *            the outgoing response
-	 * @throws Exception
-	 *             if there is an error processing the request
-	 */
-	@Override
-	protected boolean onLoginSuccess(AuthenticationToken token,
-			Subject subject, ServletRequest request, ServletResponse response)
-			throws Exception {
-		issueSuccessRedirect(request, response);
-		return false;
-	}
-
-	/**
 	 * If login has failed, redirect user to the Identity Provider error page
 	 * except if the user is already authenticated, in which case redirect to
 	 * the default success URL.

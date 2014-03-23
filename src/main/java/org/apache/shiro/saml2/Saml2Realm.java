@@ -33,6 +33,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.StringUtils;
+import org.opensaml.saml2.common.SAML2Helper;
 import org.opensaml.saml2.core.Assertion;
 import org.opensaml.saml2.core.Attribute;
 import org.opensaml.saml2.core.Response;
@@ -115,10 +116,11 @@ public class Saml2Realm extends AuthorizingRealm {
 			saml2Token.setNameId(nameId);
 
 			/*
-			 * TODO Handle validity of the assertions, remember me options, etc.
-			 * Might make sense to write a separate validator module unless
-			 * something already exists that I'm ignorant about.
+			 * Fail authentication in case there has been a timeout
 			 */
+			if (!SAML2Helper.isValid(response)) {
+				return null;
+			}
 
 			/*
 			 * TODO Again, keeping things simple, assuming one attribute
@@ -196,7 +198,7 @@ public class Saml2Realm extends AuthorizingRealm {
 	 *            XML object list
 	 * @return XML values as String list
 	 */
-	public static List<String> getStringValuesFromXMLObjects(
+	private static List<String> getStringValuesFromXMLObjects(
 			List<XMLObject> xmlObjs) {
 		List<String> strings = new ArrayList<String>();
 		for (XMLObject xmlObj : xmlObjs) {
