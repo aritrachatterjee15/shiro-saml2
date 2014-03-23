@@ -17,6 +17,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.opensaml.saml2.core.Response;
 import org.opensaml.xml.ConfigurationException;
+import org.opensaml.xml.util.Base64;
 
 /**
  * @author AritraChatterjee
@@ -34,7 +35,9 @@ public class TestTokenToSaml2Response {
 	public void testConvertToken() throws Saml2TokenValidationException,
 			ConfigurationException {
 		Response response = TokenToSaml2Response
-				.convertToken(SampleSamlResponse.SAMPLE_SAML_RESPONSE);
+				.convertToken(Base64
+						.encodeBytes(SampleSamlResponse.SAMPLE_SAML_RESPONSE
+								.getBytes()));
 		Assert.assertEquals("shiro-saml2", response.getAssertions().get(0)
 				.getSubject().getNameID().getValue());
 
