@@ -26,7 +26,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.opensaml.Configuration;
+import org.opensaml.DefaultBootstrap;
 import org.opensaml.saml2.core.Response;
+import org.opensaml.xml.ConfigurationException;
 import org.opensaml.xml.XMLObject;
 import org.opensaml.xml.io.Unmarshaller;
 import org.opensaml.xml.io.UnmarshallerFactory;
@@ -47,6 +49,12 @@ public final class TokenToSaml2Response {
 
 	public static Response convertToken(String token)
 			throws Saml2TokenValidationException {
+		try {
+			DefaultBootstrap.bootstrap();
+		} catch (ConfigurationException e) {
+			throw new Saml2TokenValidationException(
+					"OpenSAML bootstrap configuration failed.", e);
+		}
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(
 				token.getBytes());
