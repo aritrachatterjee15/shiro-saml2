@@ -198,7 +198,7 @@ public class Saml2Realm extends AuthorizingRealm {
 	 *            XML object list
 	 * @return XML values as String list
 	 */
-	private static List<String> getStringValuesFromXMLObjects(
+	protected static List<String> getStringValuesFromXMLObjects(
 			List<XMLObject> xmlObjs) {
 		List<String> strings = new ArrayList<String>();
 		for (XMLObject xmlObj : xmlObjs) {
@@ -239,7 +239,7 @@ public class Saml2Realm extends AuthorizingRealm {
 	 * @param roles
 	 *            the list of roles to add
 	 */
-	private void addRoles(SimpleAuthorizationInfo simpleAuthorizationInfo,
+	protected void addRoles(SimpleAuthorizationInfo simpleAuthorizationInfo,
 			List<String> roles) {
 		for (String role : roles) {
 			simpleAuthorizationInfo.addRole(role);
@@ -253,7 +253,7 @@ public class Saml2Realm extends AuthorizingRealm {
 	 * @param permissions
 	 *            the list of permissions to add
 	 */
-	private void addPermissions(
+	protected void addPermissions(
 			SimpleAuthorizationInfo simpleAuthorizationInfo,
 			List<String> permissions) {
 		for (String permission : permissions) {
