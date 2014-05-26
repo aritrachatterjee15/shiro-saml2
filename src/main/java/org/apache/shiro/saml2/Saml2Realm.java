@@ -42,10 +42,6 @@ import org.opensaml.xml.XMLObject;
 import org.opensaml.xml.schema.XSAny;
 import org.opensaml.xml.schema.XSString;
 
-/**
- * @author AritraChatterjee
- * 
- */
 public class Saml2Realm extends AuthorizingRealm {
 
 	/*

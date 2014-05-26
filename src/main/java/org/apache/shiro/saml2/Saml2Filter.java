@@ -32,11 +32,6 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 
- * @author AritraChatterjee
- * 
- */
 public class Saml2Filter extends AuthenticatingFilter {
 
 	private static final Logger LOGGER = LoggerFactory

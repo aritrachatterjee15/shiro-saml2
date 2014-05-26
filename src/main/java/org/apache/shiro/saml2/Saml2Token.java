@@ -20,10 +20,6 @@ package org.apache.shiro.saml2;
 
 import org.apache.shiro.authc.RememberMeAuthenticationToken;
 
-/**
- * @author AritraChatterjee
- * 
- */
 public class Saml2Token implements RememberMeAuthenticationToken {
 
 	private static final long serialVersionUID = -5283169468296310309L;

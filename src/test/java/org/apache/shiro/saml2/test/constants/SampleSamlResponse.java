@@ -10,10 +10,6 @@
  */
 package org.apache.shiro.saml2.test.constants;
 
-/**
- * @author AritraChatterjee
- * 
- */
 public class SampleSamlResponse {
 
 	//@formatter:off

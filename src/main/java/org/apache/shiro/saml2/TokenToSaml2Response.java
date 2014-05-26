@@ -38,10 +38,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-/**
- * @author AritraChatterjee
- * 
- */
 public final class TokenToSaml2Response {
 
 	private static boolean isBootStrapped = false;

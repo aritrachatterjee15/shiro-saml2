@@ -19,10 +19,6 @@ import org.opensaml.saml2.core.Response;
 import org.opensaml.xml.ConfigurationException;
 import org.opensaml.xml.util.Base64;
 
-/**
- * @author AritraChatterjee
- * 
- */
 public class TestTokenToSaml2Response {
 
 	/**

@@ -18,10 +18,6 @@
  */
 package org.apache.shiro.saml2;
 
-/**
- * @author AritraChatterjee
- * 
- */
 public class Saml2TokenValidationException extends Exception {
 
 	private static final long serialVersionUID = 2546850717853364959L;
